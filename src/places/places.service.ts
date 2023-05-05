@@ -14,6 +14,10 @@ export class PlacesService {
 
   async create(createPlaceDto: CreatePlaceDto): Promise<CreatePlaceDto | null> {
     try {
+      const { local, country } = createPlaceDto;
+      if (!(await this.validateSameCountryAndLocal(local, country))) {
+        throw new Error('Cannot post duplicated country and place');
+      }
       const newPlace = {
         ...createPlaceDto,
         id: Date.now(),
@@ -33,7 +37,7 @@ export class PlacesService {
   ): Promise<UpdatePlaceDto | null> {
     try {
       const place = await this.placeRepository.findOneBy({ id: id });
-      if (!place) throw new Error('Could not fin this place');
+      if (!place) throw new Error('Could not find this place');
 
       await this.placeRepository.update(place, updatePlaceDto);
       return updatePlaceDto;
@@ -56,6 +60,21 @@ export class PlacesService {
     } catch (error) {
       throw error;
     }
+  }
+
+  async validateSameCountryAndLocal(
+    local: string,
+    country: string,
+  ): Promise<boolean> {
+    let duplicated: Promise<Place[]>;
+    try {
+      duplicated = this.placeRepository.findBy({
+        local: local,
+        country: country,
+      });
+    } catch (error) {}
+
+    return (await duplicated).length === 0;
   }
 
   async remove(id: number): Promise<void> {
