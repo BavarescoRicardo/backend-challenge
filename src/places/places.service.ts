@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Place } from './entities/place.entity';
 import { CreatePlaceDto } from './dto/create-place.dto';
 import { UpdatePlaceDto } from './dto/update-place.dto';
+import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 
 @Injectable()
 export class PlacesService {
@@ -12,7 +13,7 @@ export class PlacesService {
     private placeRepository: Repository<Place>,
   ) {}
 
-  async create(createPlaceDto: CreatePlaceDto) {
+  async create(createPlaceDto: CreatePlaceDto): Promise<CreatePlaceDto | null> {
     try {
       const newPlace = {
         ...createPlaceDto,
@@ -20,16 +21,26 @@ export class PlacesService {
         createDate: new Date(),
         updateDate: new Date(),
       };
-      console.log('tentativa de criar novo');
-      console.log(newPlace);
+
       return this.placeRepository.save(newPlace);
     } catch (error) {
       throw error;
     }
   }
 
-  update(id: number, updatePlaceDto: UpdatePlaceDto) {
-    return `This action updates a #${id} place`;
+  async update(
+    id: number,
+    updatePlaceDto: UpdatePlaceDto,
+  ): Promise<UpdatePlaceDto | null> {
+    try {
+      const place = await this.placeRepository.findOneBy({ id: id });
+      if (!place) throw new Error('Could not fin this place');
+
+      await this.placeRepository.update(place, updatePlaceDto);
+      return updatePlaceDto;
+    } catch (error) {
+      throw error;
+    }
   }
 
   findAll(): Promise<Place[]> {
@@ -37,7 +48,11 @@ export class PlacesService {
   }
 
   findOne(id: number): Promise<Place | null> {
-    return this.placeRepository.findOneBy({ id: id });
+    try {
+      return this.placeRepository.findOneBy({ id: id });
+    } catch (error) {
+      throw error;
+    }
   }
 
   async remove(id: number): Promise<void> {
