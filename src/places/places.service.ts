@@ -42,6 +42,8 @@ export class PlacesService {
     updatePlaceDto: UpdatePlaceDto,
   ): Promise<UpdatePlaceDto | null> {
     try {
+      const { local, meta } = updatePlaceDto;
+
       const place = await this.placeRepository.findOneBy({ id: id });
       if (!place) {
         throw new HttpException(
@@ -52,8 +54,10 @@ export class PlacesService {
           HttpStatus.INTERNAL_SERVER_ERROR,
         );
       }
+      place.local = local;
+      place.meta = meta;
 
-      await this.placeRepository.update(place, updatePlaceDto);
+      await this.placeRepository.update(id, place);
       return updatePlaceDto;
     } catch (error) {
       throw error;
