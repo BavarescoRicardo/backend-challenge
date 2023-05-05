@@ -28,7 +28,7 @@ export class Place {
 
   @Column({
     name: 'flag_url',
-    nullable: false,
+    nullable: true,
     default: '',
   })
   flagUrl: string;

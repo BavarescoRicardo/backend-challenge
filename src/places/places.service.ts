@@ -1,26 +1,46 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Place } from './entities/place.entity';
 import { CreatePlaceDto } from './dto/create-place.dto';
 import { UpdatePlaceDto } from './dto/update-place.dto';
 
 @Injectable()
 export class PlacesService {
-  create(createPlaceDto: CreatePlaceDto) {
-    return 'This action adds a new place';
-  }
+  constructor(
+    @InjectRepository(Place)
+    private placeRepository: Repository<Place>,
+  ) {}
 
-  findAll() {
-    return `This action returns all places`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} place`;
+  async create(createPlaceDto: CreatePlaceDto) {
+    try {
+      const newPlace = {
+        ...createPlaceDto,
+        id: Date.now(),
+        createDate: new Date(),
+        updateDate: new Date(),
+      };
+      console.log('tentativa de criar novo');
+      console.log(newPlace);
+      return this.placeRepository.save(newPlace);
+    } catch (error) {
+      throw error;
+    }
   }
 
   update(id: number, updatePlaceDto: UpdatePlaceDto) {
     return `This action updates a #${id} place`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} place`;
+  findAll(): Promise<Place[]> {
+    return this.placeRepository.find();
+  }
+
+  findOne(id: number): Promise<Place | null> {
+    return this.placeRepository.findOneBy({ id: id });
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.placeRepository.delete(id);
   }
 }
