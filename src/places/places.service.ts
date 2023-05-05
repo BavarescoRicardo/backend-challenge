@@ -56,6 +56,7 @@ export class PlacesService {
       }
       place.local = local;
       place.meta = meta;
+      place.updateDate = new Date();
 
       await this.placeRepository.update(id, place);
       return updatePlaceDto;
