@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Place } from './entities/place.entity';
@@ -16,7 +16,13 @@ export class PlacesService {
     try {
       const { local, country } = createPlaceDto;
       if (!(await this.validateSameCountryAndLocal(local, country))) {
-        throw new Error('Cannot post duplicated country and place');
+        throw new HttpException(
+          {
+            statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+            message: 'Local deste país não pode ser adicionado novamente',
+          },
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
       }
       const newPlace = {
         ...createPlaceDto,
@@ -37,7 +43,15 @@ export class PlacesService {
   ): Promise<UpdatePlaceDto | null> {
     try {
       const place = await this.placeRepository.findOneBy({ id: id });
-      if (!place) throw new Error('Could not find this place');
+      if (!place) {
+        throw new HttpException(
+          {
+            statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+            message: 'Não foi possível encontrar este lugar',
+          },
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
+      }
 
       await this.placeRepository.update(place, updatePlaceDto);
       return updatePlaceDto;
