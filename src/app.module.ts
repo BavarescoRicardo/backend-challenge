@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { PlacesModule } from './places/places.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Place } from './places/entities/place.entity';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [],
+        entities: [Place],
         synchronize: true,
       }),
       inject: [ConfigService],
