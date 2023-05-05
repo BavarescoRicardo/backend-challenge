@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { Place } from './entities/place.entity';
 import { CreatePlaceDto } from './dto/create-place.dto';
 import { UpdatePlaceDto } from './dto/update-place.dto';
-import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 
 @Injectable()
 export class PlacesService {
