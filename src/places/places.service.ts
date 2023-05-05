@@ -91,7 +91,7 @@ export class PlacesService {
     return (await duplicated).length === 0;
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<string> {
     try {
       const place = await this.placeRepository.findOneBy({ id: id });
       if (!place) {
@@ -105,6 +105,7 @@ export class PlacesService {
       }
 
       await this.placeRepository.delete(place);
+      return `Removido lugar ${id}`;
     } catch (error) {
       throw error;
     }
