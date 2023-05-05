@@ -64,7 +64,7 @@ export class PlacesService {
     }
   }
 
-  findAll(): Promise<Place[]> {
+  findAll(): Promise<Place[] | null> {
     return this.placeRepository.find({
       order: {
         meta: 'ASC',
