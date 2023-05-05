@@ -92,6 +92,21 @@ export class PlacesService {
   }
 
   async remove(id: number): Promise<void> {
-    await this.placeRepository.delete(id);
+    try {
+      const place = await this.placeRepository.findOneBy({ id: id });
+      if (!place) {
+        throw new HttpException(
+          {
+            statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+            message: 'Não foi possível encontrar este lugar',
+          },
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
+      }
+
+      await this.placeRepository.delete(place);
+    } catch (error) {
+      throw error;
+    }
   }
 }
