@@ -44,7 +44,11 @@ export class PlacesService {
   }
 
   findAll(): Promise<Place[]> {
-    return this.placeRepository.find();
+    return this.placeRepository.find({
+      order: {
+        meta: 'ASC',
+      },
+    });
   }
 
   findOne(id: number): Promise<Place | null> {

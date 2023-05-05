@@ -1,6 +1,6 @@
 export class CreatePlaceDto {
   country: string;
   local: string;
-  meta: string;
+  meta: Date;
   flagUrl: string;
 }
