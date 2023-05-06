@@ -14,8 +14,8 @@ export class PlacesService {
 
   async create(createPlaceDto: CreatePlaceDto): Promise<CreatePlaceDto | null> {
     try {
-      const { local, country } = createPlaceDto;
-      if (!(await this.validateSameCountryAndLocal(local, country))) {
+      const { country, local } = createPlaceDto;
+      if (await this.validateSameCountryAndLocal(country, local)) {
         throw new HttpException(
           {
             statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
@@ -82,20 +82,10 @@ export class PlacesService {
   }
 
   async validateSameCountryAndLocal(
-    local: string,
     country: string,
-  ): Promise<boolean> {
-    let duplicated: Promise<Place[]>;
-    try {
-      duplicated = this.placeRepository.find({
-        where: {
-          local: local,
-          country: country,
-        },
-      });
-    } catch (error) {}
-
-    return (await duplicated)?.length === 0;
+    local: string,
+  ): Promise<Place | undefined> {
+    return await this.placeRepository.findOne({ where: { country, local } });
   }
 
   async remove(id: number): Promise<string> {

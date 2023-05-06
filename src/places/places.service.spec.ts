@@ -18,7 +18,7 @@ describe('PlacesService', () => {
       findOne: jest.fn(),
       validateSameCountryAndLocal: jest.fn(),
       create: jest.fn(),
-      update: jest.fn(),
+      save: jest.fn(),
       delete: jest.fn(),
     };
 
@@ -107,9 +107,9 @@ describe('PlacesService', () => {
         };
 
         jest.spyOn(placeRepository, 'create').mockReturnValue(mockPlace);
-        jest.spyOn(placeRepository, 'find').mockReturnValue(null);
-        //const result = await service.create(createPlaceDto);
-        //expect(result).toEqual(mockPlace);
+        jest.spyOn(placeRepository, 'findOne').mockReturnValue(null);
+        const result = await service.create(createPlaceDto);
+        expect(result).toEqual(mockPlace);
         // expect(placeRepository.create).toHaveBeenCalledWith(mockPlace);
       });
     });
