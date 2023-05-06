@@ -59,6 +59,8 @@ Em caso de dúvidas, enviar um e-mail para jobs@clubpetro.com.br
 
 
 ** Pasos para executar esta aplicação:
+  * Necessária instalação do postgresql, node js e nest js
+  Criar database places_db
   No terminal execute: npm run start:dev
 
   Estarão disponiveis as seguintes rotas:
