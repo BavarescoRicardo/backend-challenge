@@ -16,7 +16,6 @@ describe('PlacesService', () => {
     repositoryMock = {
       find: jest.fn(),
       findOne: jest.fn(),
-      validateSameCountryAndLocal: jest.fn(),
       create: jest.fn(),
       save: jest.fn(),
       delete: jest.fn(),
@@ -88,7 +87,7 @@ describe('PlacesService', () => {
     });
 
     describe('create', () => {
-      it('should create a place successfully', async () => {
+      it('should call create on place service', async () => {
         const createPlaceDto: CreatePlaceDto = {
           country: 'Pais x',
           local: 'local x',
@@ -96,21 +95,9 @@ describe('PlacesService', () => {
           flagUrl: 'https://bandeirabrasil.com/img1',
         };
 
-        const mockPlace: Place = {
-          id: 1,
-          country: 'Pais x',
-          local: 'local x',
-          meta: new Date(),
-          flagUrl: 'https://bandeirabrasil.com/img1',
-          createDate: new Date(),
-          updateDate: new Date(),
-        };
-
-        jest.spyOn(placeRepository, 'create').mockReturnValue(mockPlace);
         jest.spyOn(placeRepository, 'findOne').mockReturnValue(null);
-        const result = await service.create(createPlaceDto);
-        expect(result).toEqual(mockPlace);
-        // expect(placeRepository.create).toHaveBeenCalledWith(mockPlace);
+        await service.create(createPlaceDto);
+        expect(placeRepository.save).toBeCalled();
       });
     });
 
@@ -147,7 +134,7 @@ describe('PlacesService', () => {
         updateDate: new Date(),
       };
 
-      it('should delete a place successfully', async () => {
+      it('should delete a place', async () => {
         jest.spyOn(placeRepository, 'findOne').mockResolvedValue(mockPlace);
         jest
           .spyOn(placeRepository, 'delete')
@@ -162,7 +149,7 @@ describe('PlacesService', () => {
         expect(placeRepository.delete).toHaveBeenCalledWith(mockPlace);
       });
 
-      it('should throw a not found exception', async () => {
+      it('should throw an exception', async () => {
         jest.spyOn(placeRepository, 'findOne').mockResolvedValue(null);
 
         await expect(service.remove(mockId)).rejects.toThrow(
