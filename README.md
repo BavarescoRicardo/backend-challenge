@@ -56,3 +56,17 @@ Os dados a ser considerados são:
 - O prazo de entrega para este desafio é de 2 (duas) semanas, contando a partir do dia em que o candidato recebeu o email com o link do repositório;
 - Ao finalizar o desafio, o candidato deverá submeter o desafio no questionário disponível na sua área de candidato na plataforma(https://menvievagas.com.br/vagas/fam%C3%8Dliapires/) do Processo Seletivo. É só clicar em RESPONDER no questionário e inserir o link do seu PR.
 Em caso de dúvidas, enviar um e-mail para jobs@clubpetro.com.br
+
+
+** Pasos para executar esta aplicação:
+  No terminal execute: npm run start:dev
+
+  Estarão disponiveis as seguintes rotas:
+  GET http://localhost:3000/places
+  GET http://localhost:3000/places/{id}
+  PATCH http://localhost:3000/place/{id}
+    corpo deve ser o json para atualizar lugar e a meta
+      exemplo de corpo: {	"local": "",  "meta": "2010-08" }
+  POST http://localhost:3000/place
+    corpo deve conter os dados para um novo local 
+    exemplo de corpo { "country": "Brasil", "local": "Itapema", "meta": "2025-08", "flagUrl": "https://www.worldometers.info/img/flags/us-flag.gif" }
