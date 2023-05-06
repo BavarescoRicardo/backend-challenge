@@ -66,7 +66,7 @@ Em caso de dúvidas, enviar um e-mail para jobs@clubpetro.com.br
   GET http://localhost:3000/places/{id}
   PATCH http://localhost:3000/place/{id}
     corpo deve ser o json para atualizar lugar e a meta
-      exemplo de corpo: {	"local": "",  "meta": "2010-08" }
+      exemplo de corpo: {	"local": "",  "meta": "2023-06" }
   POST http://localhost:3000/place
     corpo deve conter os dados para um novo local 
     exemplo de corpo { "country": "Brasil", "local": "Itapema", "meta": "2025-08", "flagUrl": "https://www.worldometers.info/img/flags/us-flag.gif" }
