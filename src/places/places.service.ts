@@ -44,7 +44,7 @@ export class PlacesService {
     try {
       const { local, meta } = updatePlaceDto;
 
-      const place = await this.placeRepository.findOneBy({ id: id });
+      const place = await this.placeRepository.findOne({ where: { id: id } });
       if (!place) {
         throw new HttpException(
           {
@@ -75,7 +75,7 @@ export class PlacesService {
 
   findOne(id: number): Promise<Place | null> {
     try {
-      return this.placeRepository.findOneBy({ id: id });
+      return this.placeRepository.findOne({ where: { id: id } });
     } catch (error) {
       throw error;
     }
@@ -87,18 +87,20 @@ export class PlacesService {
   ): Promise<boolean> {
     let duplicated: Promise<Place[]>;
     try {
-      duplicated = this.placeRepository.findBy({
-        local: local,
-        country: country,
+      duplicated = this.placeRepository.find({
+        where: {
+          local: local,
+          country: country,
+        },
       });
     } catch (error) {}
 
-    return (await duplicated).length === 0;
+    return (await duplicated)?.length === 0;
   }
 
   async remove(id: number): Promise<string> {
     try {
-      const place = await this.placeRepository.findOneBy({ id: id });
+      const place = await this.placeRepository.findOne({ where: { id: id } });
       if (!place) {
         throw new HttpException(
           {
