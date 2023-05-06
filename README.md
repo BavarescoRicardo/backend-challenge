@@ -12,13 +12,6 @@
 ## Descrição
 
 Este desafio tem como objetivo avaliar as habilidades técnicas do candidato a vaga de desenvolvedor backend no Clubpetro.
-
-#### O Desafio
-
-O desafio consiste em desenvolver uma API rest que permita o CRUD de lugares para se conhecer ao redor do mundo para alimentar o frontend que pode ser visto na imagem a seguir:
-
-<img src="./img/challenge.png" alt="Desafio" >
-
 Os dados a ser considerados são:
 
 - País: O país escolhido;
@@ -28,19 +21,9 @@ Os dados a ser considerados são:
 - Data de criação do registro;
 - Data de atualização do registro.
 
-#### Requisitos Obrigatórios
-
-> Requisitos que serão avaliados no desafio.
-
-- A API deverá ser desenvolvida com Node.js e Express;
-- Apenas o Local e a Meta poderão ser editados;
-- O mesmo local em determinado país não poderá ser adicionado de forma duplicada;
-- A listagem dos dados deverá ser ordenada de forma crescente pela meta;
-- O candidato deverá adicionar ao projeto uma explicação de como executar a aplicação.
 
 #### Bônus
 
-> Requisitos que não são obrigatórios mas podem te deixar em vantagem com relação aos outros candidatos.
 
 - Utilização do framework [NestJS](https://nestjs.com/);
 - Typescript;
@@ -58,10 +41,10 @@ Os dados a ser considerados são:
 Em caso de dúvidas, enviar um e-mail para jobs@clubpetro.com.br
 
 
-** Pasos para executar esta aplicação:
-  * Necessária instalação do postgresql, node js e nest js
-  Criar database places_db
-  No terminal execute: npm run start:dev
+### Pasos para executar esta aplicação:
+  * Necessária instalação do node js 
+  docker-compose up -d
+  
 
   Estarão disponiveis as seguintes rotas:
   GET http://localhost:3000/places

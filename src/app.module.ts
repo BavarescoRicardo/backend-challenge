@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { PlacesModule } from './places/places.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Place } from './places/entities/place.entity';
 
 @Module({
   imports: [
