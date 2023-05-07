@@ -51,6 +51,8 @@ Em caso de dúvidas, enviar um e-mail para jobs@clubpetro.com.br
 
  *Executar o seguinte comando no terminal:
     docker-compose up -d
+* Para executar os testes automatizados utiliza:
+    npm run test
   
 
 #  Estarão disponiveis as seguintes rotas:
