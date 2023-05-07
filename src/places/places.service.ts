@@ -40,7 +40,7 @@ export class PlacesService {
   async update(
     id: number,
     updatePlaceDto: UpdatePlaceDto,
-  ): Promise<UpdatePlaceDto | null> {
+  ): Promise<Place | null> {
     try {
       const { local, meta } = updatePlaceDto;
 
@@ -59,7 +59,7 @@ export class PlacesService {
       place.updateDate = new Date();
 
       await this.placeRepository.update(id, place);
-      return updatePlaceDto;
+      return await this.findOne(id);
     } catch (error) {
       throw error;
     }
