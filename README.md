@@ -22,15 +22,13 @@ Os dados a ser considerados são:
 - Data de atualização do registro.
 
 
-#### Bônus
+#### Este código utiliza as seguintes tecnologias ..
 
-
-- Utilização do framework [NestJS](https://nestjs.com/);
-- Typescript;
-- Testes automatizados;
-- [TypeORM](https://typeorm.io/#/);
-- [Docker](https://www.docker.com/);
-- Deploy para [Google Cloud Platform](https://cloud.google.com/) (ao criar conta é possível receber um bonus para teste).
+- framework [NestJS] :thumbsup:
+- Typescript :thumbsup:
+- Testes automatizados :thumbsup:
+- [TypeORM] :thumbsup:
+- [Docker] :thumbsup:
 
 ### Submissão e Prazo de entrega
 
