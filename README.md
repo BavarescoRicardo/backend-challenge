@@ -1,26 +1,5 @@
 # Desafio de Backend
 
-<img src="./img/logo-clubpetro.png" style="margin-left: 100px"
-     alt="Clubpetro" width="300">
-
-- [Descrição](#descrição)
-  - [O Desafio](#o-desafio)
-  - [Requisitos Obrigatórios](#requisitos-obrigatórios)
-  - [Bônus](#bônus)
-- [Submissão e Prazo de Entrega](#submissão-e-prazo-de-entrega)
-
-## Descrição
-
-Este desafio tem como objetivo avaliar as habilidades técnicas do candidato a vaga de desenvolvedor backend no Clubpetro.
-Os dados a ser considerados são:
-
-- País: O país escolhido;
-- Local: O local dentro do país escolhido;
-- Meta: O mês e o ano que o usuário pretende visitar o local;
-- Url da bandeira do país;
-- Data de criação do registro;
-- Data de atualização do registro.
-
 
 #### Este código utiliza as seguintes tecnologias ..
 
