@@ -19,6 +19,8 @@ Em caso de dúvidas, enviar um e-mail para jobs@clubpetro.com.br
 
 
 ### Pasos para executar esta aplicação:
+ * Para instalar todas as dependencias da aplicação. Executar o comando 
+      $ npm install 
  * Necessário criação do arquivo  .env  na pasta raiz da aplicação com o seguinte texto:
    - DB_HOST='db'
    - DB_PORT=5432
